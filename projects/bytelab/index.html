@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="An interactive 8-bit binary, decimal and hexadecimal playground.">
+  <title>ByteLab — GPT Sandbox</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="../../"><span class="brand-icon">01</span> GPT Sandbox</a>
+      <span class="top-note">PROJECT 003 / DIGITAL LOGIC</span>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">BITS · BYTES · NUMBER SYSTEMS</p>
+      <h1>Meet the <span>byte.</span></h1>
+      <p class="intro">Flip bits, translate number systems, and experiment with bitwise logic. One byte, eight switches, lots to discover.</p>
+    </section>
+
+    <section class="panel inspector">
+      <div class="section-head">
+        <div><p class="eyebrow">BYTE INSPECTOR</p><h2>One value, three views</h2></div>
+        <span class="live"><i></i> Live updates</span>
+      </div>
+      <label for="decimal-input">Decimal value <span>0–255</span></label>
+      <div class="number-input">
+        <input id="decimal-input" type="number" min="0" max="255" step="1" value="173" inputmode="numeric">
+        <button id="reset-byte" class="quiet-button" type="button">Reset</button>
+      </div>
+      <p id="value-error" class="error" role="alert" hidden>Enter a whole number from 0 to 255.</p>
+
+      <div class="representations">
+        <div class="representation"><span>DECIMAL</span><strong id="decimal-value">173</strong></div>
+        <div class="representation"><span>HEXADECIMAL</span><strong id="hex-value">AD</strong></div>
+        <div class="representation"><span>BINARY</span><strong id="binary-value">10101101</strong></div>
+      </div>
+
+      <div class="bits-title"><h3>Bit switches</h3><span>Most significant → least significant</span></div>
+      <div id="bit-switches" class="bit-grid" aria-label="Eight interactive bit switches"></div>
+      <div class="place-values" aria-hidden="true">
+        <span>128</span><span>64</span><span>32</span><span>16</span><span>8</span><span>4</span><span>2</span><span>1</span>
+      </div>
+      <p class="hint">Each switch represents a power of two. Turn one on to add its place value to the byte.</p>
+    </section>
+
+    <section class="panel logic">
+      <div class="section-head">
+        <div><p class="eyebrow">BITWISE WORKBENCH</p><h2>Combine two bytes</h2></div>
+        <span class="tag">8-BIT LOGIC</span>
+      </div>
+      <div class="operands">
+        <label>Value A<input id="operand-a" type="number" min="0" max="255" value="173"></label>
+        <label>Operation
+          <select id="operator">
+            <option value="AND">AND · both bits on</option>
+            <option value="OR">OR · either bit on</option>
+            <option value="XOR">XOR · bits are different</option>
+          </select>
+        </label>
+        <label>Value B<input id="operand-b" type="number" min="0" max="255" value="90"></label>
+      </div>
+      <p id="logic-error" class="error" role="alert" hidden>Both operands must be whole numbers from 0 to 255.</p>
+      <div class="logic-result">
+        <div class="logic-line"><span>A</span><code id="logic-a">10101101</code></div>
+        <div class="logic-line"><span>B</span><code id="logic-b">01011010</code></div>
+        <div class="logic-rule"></div>
+        <div class="logic-line result-line"><span id="result-op">AND</span><code id="logic-result">00001000</code></div>
+        <p id="logic-explanation" class="hint">AND keeps a bit only when both corresponding bits are 1.</p>
+      </div>
+    </section>
+
+    <section class="panel notes">
+      <p class="eyebrow">QUICK NOTE</p>
+      <p><strong>Why eight bits?</strong> A bit stores one of two states: 0 or 1. Eight bits form a byte, which can represent 256 different values — from 0 through 255 when treated as an unsigned integer.</p>
+    </section>
+
+    <footer class="footer"><span>Offline by design · No tracking · No dependencies</span><a href="README.md">Project notes</a></footer>
+  </main>
+</body>
+</html>
