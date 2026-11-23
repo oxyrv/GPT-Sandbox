@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b27">
+  <meta name="description" content="An offline-friendly IPv4 subnet calculator and CIDR learning playground.">
+  <title>CIDR Playground — GPT Sandbox</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="../../" aria-label="GPT Sandbox home"><span class="brand-mark">⌘</span> GPT Sandbox</a>
+      <span class="top-note">PROJECT 002 / NETWORKING TOOL</span>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">IPv4 · SUBNETTING · CIDR</p>
+      <h1>Make networks<br><span>make sense.</span></h1>
+      <p class="intro">Drop in an IPv4 address and prefix. Get the subnet breakdown instantly, with the binary bits laid out so you can see what is happening.</p>
+    </section>
+
+    <section class="workspace panel" aria-labelledby="input-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">THE INPUT</p>
+          <h2 id="input-title">Your network</h2>
+        </div>
+        <span class="status"><span class="status-dot"></span> Runs locally</span>
+      </div>
+      <form id="subnet-form" novalidate>
+        <label for="cidr-input">IPv4 address / prefix</label>
+        <div class="input-row">
+          <input id="cidr-input" name="cidr" type="text" value="192.168.10.42/24" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="input-help input-error">
+          <button class="primary-button" type="submit">Calculate <span aria-hidden="true">↗</span></button>
+        </div>
+        <p class="help" id="input-help">Format: <code>192.168.1.10/24</code> · Prefix range: <code>/0</code> to <code>/32</code></p>
+        <p class="error" id="input-error" role="alert" hidden></p>
+      </form>
+      <div class="examples" aria-label="Example networks">
+        <span>Try:</span>
+        <button type="button" class="example" data-example="10.0.0.1/8">10.0.0.1/8</button>
+        <button type="button" class="example" data-example="172.16.5.20/20">172.16.5.20/20</button>
+        <button type="button" class="example" data-example="192.168.1.130/26">192.168.1.130/26</button>
+        <button type="button" class="example" data-example="192.0.2.10/31">/31 point-to-point</button>
+      </div>
+    </section>
+
+    <section id="results" class="results" aria-live="polite" aria-busy="false">
+      <div class="section-heading result-heading">
+        <div><p class="eyebrow">THE BREAKDOWN</p><h2>Network details</h2></div>
+        <span id="prefix-label" class="prefix-pill">/24</span>
+      </div>
+
+      <div class="stat-grid">
+        <article class="stat-card accent-card">
+          <span class="stat-label">NETWORK ADDRESS</span>
+          <strong id="network-address">192.168.10.0</strong>
+          <span class="stat-hint">Identifies this subnet</span>
+          <button class="copy-button" data-copy="network-address" type="button" aria-label="Copy network address">Copy</button>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">BROADCAST ADDRESS</span>
+          <strong id="broadcast-address">192.168.10.255</strong>
+          <span class="stat-hint">IPv4 subnet broadcast</span>
+          <button class="copy-button" data-copy="broadcast-address" type="button" aria-label="Copy broadcast address">Copy</button>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">SUBNET MASK</span>
+          <strong id="subnet-mask">255.255.255.0</strong>
+          <span class="stat-hint">Network bits set to 1</span>
+          <button class="copy-button" data-copy="subnet-mask" type="button" aria-label="Copy subnet mask">Copy</button>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">WILDCARD MASK</span>
+          <strong id="wildcard-mask">0.0.0.255</strong>
+          <span class="stat-hint">Inverse of the subnet mask</span>
+          <button class="copy-button" data-copy="wildcard-mask" type="button" aria-label="Copy wildcard mask">Copy</button>
+        </article>
+      </div>
+
+      <div class="detail-grid">
+        <article class="panel detail-card">
+          <p class="eyebrow">ADDRESS RANGE</p>
+          <h3>Usable host range</h3>
+          <div class="range-line"><span>First</span><strong id="first-host">192.168.10.1</strong></div>
+          <div class="range-line"><span>Last</span><strong id="last-host">192.168.10.254</strong></div>
+          <div class="range-line"><span>Total addresses</span><strong id="total-addresses">256</strong></div>
+          <div class="range-line"><span>Usable hosts</span><strong id="usable-hosts">254</strong></div>
+        </article>
+        <article class="panel detail-card">
+          <p class="eyebrow">QUICK FACTS</p>
+          <h3>Subnet properties</h3>
+          <div class="range-line"><span>IP address</span><strong id="input-address">192.168.10.42</strong></div>
+          <div class="range-line"><span>Prefix length</span><strong id="prefix-length">24 bits</strong></div>
+          <div class="range-line"><span>Host bits</span><strong id="host-bits">8 bits</strong></div>
+          <div class="range-line"><span>Address class</span><strong id="address-scope">Private</strong></div>
+        </article>
+      </div>
+
+      <article class="panel binary-card">
+        <div class="binary-head">
+          <div><p class="eyebrow">UNDER THE HOOD</p><h3>Binary view</h3></div>
+          <p><span class="legend network-legend"></span> Network bits <span class="legend host-legend"></span> Host bits</p>
+        </div>
+        <div id="binary-grid" class="binary-grid" aria-label="Binary representation of the subnet mask and IP address">
+          <div class="binary-row"><span>IP</span><code>11000000.10101000.00001010.00101010</code></div>
+          <div class="binary-row"><span>Mask</span><code>11111111.11111111.11111111.00000000</code></div>
+        </div>
+        <p class="binary-note">The prefix tells you how many bits belong to the network. The remaining bits identify addresses inside that subnet.</p>
+      </article>
+      <p class="footnote" id="special-note">Private IPv4 address space · Results are calculated in your browser.</p>
+    </section>
+
+    <footer class="footer">
+      <span>Built for curiosity. No tracking. No dependencies.</span>
+      <a href="README.md">About this project</a>
+    </footer>
+  </main>
+</body>
+</html>
