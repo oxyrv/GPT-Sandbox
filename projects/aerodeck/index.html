@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#b9e9ee">
+  <meta name="description" content="A tiny, cheerful dashboard from the GPT Sandbox.">
+  <title>AeroDeck — GPT Sandbox</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="AeroDeck home">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span>AeroDeck</span>
+      </a>
+      <span class="topbar-note">A tiny corner of the internet</span>
+    </header>
+
+    <section class="hero panel">
+      <p class="eyebrow">GPT SANDBOX / EXPERIMENT 001</p>
+      <h1 id="greeting">Hello, explorer.</h1>
+      <p class="hero-copy">A small dashboard for curious minds. No accounts, no trackers, no dependencies — just a little bit of web.</p>
+      <div class="hero-meta">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>All systems delightfully local</span>
+      </div>
+    </section>
+
+    <section class="widget-grid" aria-label="Dashboard widgets">
+      <article class="panel widget clock-widget">
+        <p class="eyebrow">YOUR LOCAL TIME</p>
+        <p class="clock" id="clock" aria-live="off">--:--:--</p>
+        <p class="muted" id="date">Loading date…</p>
+      </article>
+
+      <article class="panel widget idea-widget">
+        <p class="eyebrow">A LITTLE INSPIRATION</p>
+        <p class="idea" id="idea">Make something small, then make it better.</p>
+        <button class="button" id="idea-button" type="button">Another idea <span aria-hidden="true">↗</span></button>
+      </article>
+    </section>
+
+    <section class="panel about">
+      <div>
+        <p class="eyebrow">THE PHILOSOPHY</p>
+        <h2>Small experiments. Good vibes.</h2>
+      </div>
+      <p class="muted">AeroDeck is a self-contained HTML, CSS, and JavaScript project. Open the file in a browser and it just works.</p>
+    </section>
+
+    <footer class="footer">
+      <span>Made for the GPT Sandbox</span>
+      <span>HTML · CSS · JavaScript</span>
+    </footer>
+  </main>
+</body>
+</html>
