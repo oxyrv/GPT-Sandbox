@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#c8edf0">
+  <meta name="description" content="A public playground for small, safe, readable experiments.">
+  <title>GPT Sandbox — Experiments & curiosities</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      color: #17434b;
+      background: #c8edf0;
+      --muted: #557b80;
+      --glass: rgb(255 255 255 / 66%);
+      --line: rgb(255 255 255 / 88%);
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 12% 12%, rgb(255 255 255 / 90%), transparent 34rem),
+        radial-gradient(ellipse at 88% 30%, rgb(125 220 209 / 65%), transparent 32rem),
+        linear-gradient(145deg, #d8f5f3, #a8dfe7 55%, #c4e8dc);
+    }
+    a { color: inherit; }
+    .shell { width: min(900px, calc(100% - 36px)); margin: auto; padding: 32px 0; }
+    .topbar, .brand, .footer { display: flex; align-items: center; justify-content: space-between; }
+    .brand { justify-content: flex-start; gap: 10px; font-weight: 800; text-decoration: none; }
+    .mark {
+      display: grid; width: 36px; height: 36px; place-items: center;
+      border: 1px solid var(--line); border-radius: 12px;
+      background: linear-gradient(145deg, white, #b9eef0);
+      box-shadow: 0 5px 14px rgb(36 116 124 / 15%);
+    }
+    .top-note, .muted, .footer { color: var(--muted); }
+    .top-note, .footer { font-size: .82rem; }
+    .panel {
+      border: 1px solid var(--line); border-radius: 24px;
+      background: var(--glass); box-shadow: 0 18px 50px rgb(34 103 112 / 13%), inset 0 1px 0 white;
+      backdrop-filter: blur(16px);
+    }
+    .hero { position: relative; overflow: hidden; margin-top: 30px; padding: clamp(30px, 7vw, 64px); }
+    .hero::after {
+      position: absolute; top: -85px; right: -35px; width: 245px; height: 245px;
+      border: 1px solid rgb(255 255 255 / 70%); border-radius: 50%;
+      background: linear-gradient(145deg, rgb(255 255 255 / 65%), rgb(118 220 215 / 18%));
+      box-shadow: inset 12px 12px 30px rgb(255 255 255 / 35%), 0 20px 45px rgb(51 139 144 / 10%);
+      content: "";
+    }
+    .eyebrow { margin: 0 0 14px; color: #43858a; font-size: .7rem; font-weight: 800; letter-spacing: .16em; }
+    h1 { max-width: 620px; margin: 0 0 16px; font-size: clamp(2.7rem, 8vw, 5rem); letter-spacing: -.065em; line-height: .98; }
+    .intro { max-width: 570px; color: var(--muted); font-size: 1.08rem; line-height: 1.7; }
+    .project { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; margin-top: 18px; padding: 28px; }
+    .project h2 { margin: 0 0 8px; font-size: 1.5rem; }
+    .project p { max-width: 570px; margin: 0; color: var(--muted); line-height: 1.65; }
+    .tag { display: inline-block; margin-bottom: 12px; color: #43858a; font-size: .68rem; font-weight: 800; letter-spacing: .14em; }
+    .button {
+      display: inline-flex; align-items: center; gap: 10px; padding: 12px 17px;
+      border: 1px solid white; border-radius: 999px; background: linear-gradient(180deg, white, #c9f0ed);
+      box-shadow: 0 5px 13px rgb(40 117 122 / 12%); font-weight: 700; text-decoration: none;
+      white-space: nowrap; transition: transform 160ms ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    a:focus-visible { outline: 3px solid #267d91; outline-offset: 4px; }
+    .note { margin-top: 18px; padding: 22px 26px; }
+    .note p { margin: 0; color: var(--muted); line-height: 1.65; }
+    .footer { gap: 12px; flex-wrap: wrap; padding: 22px 4px 0; }
+    @media (max-width: 650px) {
+      .top-note { display: none; }
+      .project { grid-template-columns: 1fr; }
+      .button { justify-content: center; }
+      .hero::after { right: -140px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="GPT Sandbox home">
+        <span class="mark" aria-hidden="true">✦</span>
+        <span>GPT Sandbox</span>
+      </a>
+      <span class="top-note">A public playground for curious minds</span>
+    </header>
+
+    <section class="panel hero">
+      <p class="eyebrow">OPEN SPACE / SMALL EXPERIMENTS</p>
+      <h1>Ideas are better when you build them.</h1>
+      <p class="intro">Welcome to the GPT Sandbox: a collection of small, safe, readable experiments. Some might be useful, some might be delightfully weird. All are made to be explored.</p>
+    </section>
+
+    <section class="panel project" aria-labelledby="aerodeck-title">
+      <div>
+        <span class="tag">PROJECT 001 · WEB EXPERIMENT</span>
+        <h2 id="aerodeck-title">AeroDeck</h2>
+        <p>A tiny Frutiger Aero-inspired dashboard with a live clock, a friendly greeting, and a little idea generator. No frameworks, no trackers, no dependencies.</p>
+      </div>
+      <a class="button" href="./projects/aerodeck/">Explore AeroDeck <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="panel note">
+      <p><strong>Built in the open.</strong> This sandbox is public by design. Browse the source, learn from it, remix ideas, and keep things kind.</p>
+    </section>
+
+    <footer class="footer">
+      <span>Made with curiosity · GPT Sandbox</span>
+      <a href="https://github.com/oxyrv/GPT-Sandbox">View source on GitHub ↗</a>
+    </footer>
+  </main>
+</body>
+</html>
