@@ -8,6 +8,7 @@ A public playground for small, safe, readable experiments.
 | --- | --- | --- |
 | [AeroDeck](projects/aerodeck/) | A tiny, dependency-free dashboard with a Frutiger Aero-inspired look | In progress |
 | [CIDR Playground](projects/cidr-playground/) | An offline IPv4 subnet calculator with a visual binary breakdown | In progress |
+| [ByteLab](projects/bytelab/) | An interactive 8-bit binary, decimal, hexadecimal, and bitwise logic playground | In progress |
 
 ## Repository guidelines
 
